@@ -1,0 +1,31 @@
+.TH UDOWN 1 "November 2024" "Version 1.0" "User Commands"
+.SH NAME
+udown \- download YouTube videos in MP4 format
+.SH SYNOPSIS
+.B udown
+[\fB\-f\fR \fIfilename\fR]
+\fIYouTube-URL\fR
+.SH DESCRIPTION
+.B udown
+is a command-line tool that downloads YouTube videos in MP4 format using yt-dlp. It automatically selects the best video and audio quality available and merges them into a single MP4 file.
+.SH OPTIONS
+.TP
+.BR \-f " " \fIfilename
+Specify the output filename. If not provided, defaults to "video.mp4".
+.SH EXAMPLES
+.TP
+Download a video with default filename:
+.B udown
+https://youtube.com/watch?v=example
+.TP
+Download a video with custom filename:
+.B udown
+\-f custom_video.mp4 https://youtube.com/watch?v=example
+.SH EXIT STATUS
+Returns 0 on successful download, 1 on failure.
+.SH AUTHOR
+Written by William Gay.
+.SH BUGS
+Report bugs to the author.
+.SH SEE ALSO
+yt-dlp(1)

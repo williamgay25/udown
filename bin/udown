@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Default file name
+OUTPUT_FILE="video.mp4"
+
+# Function to display usage
+usage() {
+    echo "Usage: alludown [-f filename] <YouTube URL>"
+    echo "  -f filename    Specify the output file name (default: video.mp4)"
+    exit 1
+}
+
+# Parse options
+while getopts ":f:" opt; do
+    case $opt in
+        f) OUTPUT_FILE="$OPTARG";;
+        *) usage;;
+    esac
+done
+shift $((OPTIND -1))
+
+# Check if a URL is provided
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+# YouTube URL
+URL="$1"
+
+# Use yt-dlp to download the video as an mp4 file
+yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o "$OUTPUT_FILE" "$URL"
+
+# Confirm success
+if [ $? -eq 0 ]; then
+    echo "Download completed: $OUTPUT_FILE"
+else
+    echo "Download failed"
+    exit 1
+fi
