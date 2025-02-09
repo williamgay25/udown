@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Default file name
 OUTPUT_FILE="video.mp4"
 
@@ -27,8 +26,11 @@ fi
 # YouTube URL
 URL="$1"
 
-# Use yt-dlp to download the video as an mp4 file
-yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o "$OUTPUT_FILE" "$URL"
+# Use yt-dlp to download the video in a format compatible with iMovie
+yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' \
+    --merge-output-format mp4 \
+    --postprocessor-args "-codec:v h264 -codec:a aac" \
+    -o "$OUTPUT_FILE" "$URL"
 
 # Confirm success
 if [ $? -eq 0 ]; then
